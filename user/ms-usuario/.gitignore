@@ -31,3 +31,17 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore build directories
+**/target/
+**/build/
+
+
+
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+
+
