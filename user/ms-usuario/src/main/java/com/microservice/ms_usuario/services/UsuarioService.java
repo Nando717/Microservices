@@ -2,6 +2,7 @@ package com.microservice.ms_usuario.services;
 
 
 import com.microservice.ms_usuario.models.UsuarioModel;
+import com.microservice.ms_usuario.producers.UsuarioProducer;
 import com.microservice.ms_usuario.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,15 @@ public class UsuarioService {
     UsuarioRepository usuarioRepository;
 
 
+    @Autowired
+    UsuarioProducer usuarioProducer;
 
     @Transactional
     public UsuarioModel criarUsuario(UsuarioModel usuarioModel){
 
-        return  usuarioRepository.save(usuarioModel);
+        usuarioModel = usuarioRepository.save(usuarioModel);
+        usuarioProducer.publishMenssageEmail(usuarioModel);
+        return usuarioModel;
     }
 
 
