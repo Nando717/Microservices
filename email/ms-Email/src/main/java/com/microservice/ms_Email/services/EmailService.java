@@ -16,14 +16,15 @@ import java.time.LocalDateTime;
 @Service
 public class EmailService {
 
-    @Autowired
-    EmailRepository emailRepository;
+    final EmailRepository emailRepository;
+    final  JavaMailSender emailSender;
 
-    @Autowired
-    JavaMailSender emailSender;
+public EmailService(EmailRepository emailRepository, JavaMailSender emailSender){
+    this.emailRepository = emailRepository;
+    this.emailSender = emailSender;
+}
 
-
-    @Value(value = "${spring.mailusername}")
+    @Value(value = "${spring.mail.username}")
     private String emailFrom;
 
 

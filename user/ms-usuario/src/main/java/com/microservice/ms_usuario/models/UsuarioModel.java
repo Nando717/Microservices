@@ -11,12 +11,23 @@ import java.util.UUID;
 public class UsuarioModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
 
+    private UUID userId;
 
-    private UUID userID;
+    private String name;
+    private String email;
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
 
     public String getName() {
         return name;
@@ -32,16 +43,5 @@ public class UsuarioModel implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    private String name;
-    private String email;
-
-    public UUID getId() {
-        return userID;
-    }
-
-    public void setId(UUID id) {
-        this.userID = id;
     }
 }

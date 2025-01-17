@@ -11,8 +11,10 @@ import org.springframework.stereotype.Component;
 public class UsuarioProducer {
 
 
-    @Autowired
-    RabbitTemplate rabbitTemplate;
+   final RabbitTemplate rabbitTemplate;
+   public UsuarioProducer(RabbitTemplate rabbitTemplate){
+       this.rabbitTemplate = rabbitTemplate;
+   }
 
 
     @Value(value = "${broker.queue.email.name}")
@@ -21,10 +23,10 @@ public class UsuarioProducer {
 
     public void publishMenssageEmail(UsuarioModel usuarioModel){
         var emailDto = new EmailDto();
-        emailDto.setUserID(usuarioModel.getId());
+        emailDto.setUserID(usuarioModel.getUserId());
         emailDto.setEmailTo(usuarioModel.getEmail());
         emailDto.setSubject("Cadastro Realizado Com Sucesso");
-        emailDto.setText(usuarioModel.getName()+ ", seja em Vindo(a)! \nAgradeçemos o seu cadastro, aproveite agora todos os recursos da plataforma");
+        emailDto.setText(usuarioModel.getName()+ ", seja Bem Vindo(a)! \nAgradeçemos o seu cadastro, aproveite agora todos os recursos da plataforma");
 
           rabbitTemplate.convertAndSend("", routingKey, emailDto);
     }
