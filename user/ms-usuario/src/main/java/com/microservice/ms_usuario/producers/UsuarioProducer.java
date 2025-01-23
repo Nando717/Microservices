@@ -3,7 +3,6 @@ package com.microservice.ms_usuario.producers;
 import com.microservice.ms_usuario.dtos.EmailDto;
 import com.microservice.ms_usuario.models.UsuarioModel;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
